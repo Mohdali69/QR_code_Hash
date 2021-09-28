@@ -32,51 +32,76 @@
 </html>
 -->
 <html>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 
 
 	<head>
-		<title>Connexion</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<title>QR code Hash</title>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="css/indexcss.css" />
-		<noscript><link rel="stylesheet" href="assets1/css/noscript.css" /></noscript>
+
 	</head>
 
 	<body class="is-preload">
-  <div class="login-wrap">
-	<div class="login-html">
-		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-		<input id="tab-2" type="radio" name="tab" class="for-pwd"><label for="tab-2" class="tab">Forgot Password</label>
-		<div class="login-form">
-			<div class="sign-in-htm">
-				<div class="group">
-					<label for="user" class="label">Username or Email</label>
-					<input id="user" type="text" class="input">
-				</div>
-				<div class="group">
-					<label for="pass" class="label">Password</label>
-					<input id="pass" type="password" class="input" data-type="password">
-				</div>
-				<div class="group">
-					<input type="submit" class="button" value="Sign In">
-				</div>
-				<div class="hr"></div>
-			</div>
-			<div class="for-pwd-htm">
-				<div class="group">
-					<label for="user" class="label">Username or Email</label>
-					<input id="user" type="text" class="input">
-				</div>
-				<div class="group">
-					<input type="submit" class="button" value="Reset Password">
-				</div>
-				<div class="hr"></div>
-			</div>
-		</div>
-	</div>
-</div>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container login-container">
+            <div class="row">
+                <div class="col-md-6 login-form-1">
+                    <h3>Send a secure QR code</h3>
+										<?php if (isset($_GET['error'])) { ?>
+					     		<p class="error" style="color:red;"><?php echo $_GET['error']; ?></p>
+					     	<?php } ?>
+								<?php if (isset($_GET['success'])) { ?>
+							<p class="success" style="color:green;"><?php echo $_GET['success']; ?></p>
+						<?php } ?>
+											<form action="send.php" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Receiver *" name="Email" />
+                        </div>
+												<div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Email *" name="YEmail" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your URL to convert and send *" name="urlqr" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Send" />
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btnForgetPwd">Forget Password?</a>
+                        </div>
+											</form>
+                </div>
+                <div class="col-md-6 login-form-2">
+                    <div class="login-logo">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                    </div>
+                    <h3>Receive your secure QR code</h3>
+										<?php if (isset($_GET['send'])) { ?>
+									<p class="success" style="color:green;"><?php echo $_GET['send']; ?></p>
+								<?php } ?>
+								<?php if (isset($_GET['lost'])) { ?>
+							<p class="success" style="color:red;"><?php echo $_GET['lost']; ?></p>
+						<?php } ?>
+												<form action="receive.php" method="post">
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Your Code Receive by E-mail *" name="code" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Receive" />
+                        </div>
+                        <div class="form-group">
+
+                            <a href="#" class="btnForgetPwd" value="Login">Forget Password?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 </body>
 </html>
