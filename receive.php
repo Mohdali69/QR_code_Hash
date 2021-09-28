@@ -2,9 +2,9 @@
 session_start();
 include "db_conn.php";
 // Include qrcode.php file.
-include "qrcode.php";
+
 // Create object
-$qc = new QRCODE();
+include('php-qrcode-master/lib/full/qrlib.php');
 if (isset($_POST['code'])) {
 
 	function validate($data){
@@ -30,21 +30,14 @@ if (isset($_POST['code'])) {
 						$urlqrc = $row['URL'];
 						$passwds = $row['CODE'];
             if ($passwds === $pass) {
-            //	$_SESSION['user_name'] = $row['user_name'];
-          	//	$_SESSION['name'] = $row['name'];
-            //	$_SESSION['id'] = $row['id'];
-						// Create Text Code
-						$qc->URL($urlqrc);
-						// Save QR Code
-						$qc->QRCODE(400,"QrcodeGenrate.png");
-            	
-		        exit();
+						QRcode::png($urlqrc);
+						exit();
             }else{
-				header("Location: index.php?lost=IncorectSS CODE");
+				header("Location: index.php?lost=Incorect CODE");
 		        exit();
 			}
 		}else{
-			header("Location: index.php?lost=IncorectS CODE");
+			header("Location: index.php?lost=Incorect CODE");
 	        exit();
 		}
 	}
